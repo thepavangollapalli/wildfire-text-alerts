@@ -1,0 +1,2 @@
+class Wildfire < ApplicationRecord
+end

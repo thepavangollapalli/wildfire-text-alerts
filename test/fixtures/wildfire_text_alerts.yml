@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  wildfire_id: 1
+  text_sent_at: 2020-09-20 19:51:28
+
+two:
+  user_id: 1
+  wildfire_id: 1
+  text_sent_at: 2020-09-20 19:51:28

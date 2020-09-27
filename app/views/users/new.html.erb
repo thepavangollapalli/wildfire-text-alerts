@@ -1,0 +1,7 @@
+Wildfire text alerts
+<%= form_with model: @user do |f| %>
+    phone: <%= f.text_field :phone %>
+    zip: <%= f.text_field :zip %>
+    <%= f.submit "Sign up for text alerts" %>
+<% end %>
+

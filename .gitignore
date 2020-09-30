@@ -35,3 +35,7 @@
 yarn-debug.log*
 .yarn-integrity
 twilio.env
+c_03mr20.csv
+us-zip-code-latitude-and-longitude.csv
+parse_fips_to_hash.rb
+parse_zip_to_hash.rb

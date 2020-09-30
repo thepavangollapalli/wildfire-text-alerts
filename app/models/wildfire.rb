@@ -8,13 +8,13 @@ class Wildfire < ApplicationRecord
     # prefer lat/long, fall back on fips
 
     # helper method to convert fips to lat/long
-    def fips_to_coords
-
+    def fips_to_coords(fips)
+        FipsToCoordsHelper::LOOKUP[fips]
     end
 
     # helper method to convert zip to lat/long
-    def zip_to_coords
-
+    def zip_to_coords(zip)
+        ZipToCoordsHelper::LOOKUP[zip]
     end
 
     # helper method to calculate distance between two lat/longs

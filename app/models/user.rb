@@ -1,33 +1,28 @@
 class User < ApplicationRecord
-    require 'twilio-ruby'
-    account_sid = ENV['TWILIO_ACCOUNT_SID']
-    auth_token = ENV['TWILIO_AUTH_TOKEN']
-    @client = Twilio::REST::Client.new(account_sid, auth_token)
-
     has_many :wildfires, through: :wildfire_text_alerts
 
-    # validation for phone number, zip code
+    validates :phone, format: { with: /(\+1)[0-9]{10}/, message: "must include US country code (+1)" }
+    validates :zip, inclusion: { in: ZipToCoordsHelper::LOOKUP_HASH.keys, message: "is not a valid US zip code" }
+    validates :phone, uniqueness: { scope: :zip, message: "can only be used once per zip"}
 
-    # callback to trigger validation for user phone number
-    def register_phone
-        byebug
-        validation_request = @client.validation_requests
-                            .create(
-                               friendly_name: self.phone_number,
-                               phone_number: self.phone_number
-                            )
-        #what are all the ways this can fail? handle them before setting active to true
-        puts validation_request.friendly_name
-        self.update(active: true)
+    after_create :send_current_fires
+
+    def to_h
+        h = Hash.new
+        fires = self.nearby_fires
+        one_fire = fires.count == 1
+        zero_fires = fires.count == 0
+        intro_msg = "There #{one_fire ? "is" : "are"} #{fires.count} #{one_fire ? "fire" : "fires"} near you#{zero_fires ? "." : ": "}"
+        h[self.phone.to_s] = intro_msg + fires.join(" ")
+        h
     end
 
-    # callback to send texts for all fires in area
     def send_current_fires
-        SendTextWorker.perform_async(self)
+        SendTextWorker.perform_async(self.to_h)
     end
 
-    # helper method for all fires that affect a user
-    def affected_fires
-
+    def nearby_fires
+        #turn into scope?
+        Wildfire.select { |w| w.fire_within_radius(25, self.zip) }
     end
 end

@@ -17,7 +17,7 @@ class IrwinApiPollingWorker
 
         response = HTTParty.get("https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Active_Fires/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
         return unless response.code == 200
-        
+
         response_json = JSON.parse(response)
         fires = response_json["features"]
         fires.each do |f|
@@ -34,5 +34,6 @@ class IrwinApiPollingWorker
             puts "Created record for #{wildfire.incident_name}"
         end
         puts "Created #{Wildfire.count} records from #{fires.length} api rows"
+        # mark fires missing from response as stale
     end
 end

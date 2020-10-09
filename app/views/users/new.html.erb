@@ -4,4 +4,6 @@ Wildfire text alerts
     zip: <%= f.text_field :zip %>
     <%= f.submit "Sign up for text alerts" %>
 <% end %>
-
+<% flash.each do |msg| %>
+    <%= msg %>
+<% end %>

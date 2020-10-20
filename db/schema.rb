@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_040849) do
+ActiveRecord::Schema.define(version: 2020_10_20_021410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2020_09_22_040849) do
     t.datetime "text_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "msg_hash"
+    t.string "zip"
   end
 
   create_table "wildfires", force: :cascade do |t|
@@ -36,11 +38,14 @@ ActiveRecord::Schema.define(version: 2020_09_22_040849) do
     t.float "initial_latitude"
     t.float "initial_longitude"
     t.datetime "discovered_at"
-    t.float "calculated_acres"
+    t.float "calculated_acres", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "object_id"
     t.string "fips"
+    t.datetime "archived_on"
+    t.float "percent_contained", default: 0.0
+    t.boolean "stale"
   end
 
 end

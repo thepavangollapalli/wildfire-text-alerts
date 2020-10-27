@@ -1,8 +1,8 @@
 class User < ApplicationRecord
     has_many :wildfire_text_alerts
 
-    validates :phone, format: { with: /(\+1)[0-9]{10}/, message: "must include US country code (+1)" }
-    validates :zip, inclusion: { in: ZipToCoordsHelper::LOOKUP_HASH.keys, message: "is not a valid US zip code" }
+    validates :phone, presence: true, format: { with: /\A(\+1)[0-9]{10}\Z/, message: "can only include digits and US country code (+1)" }
+    validates :zip, presence: true, inclusion: { in: ZipToCoordsHelper::LOOKUP_HASH.keys, message: "is not a valid US zip code" }
     validates :phone, uniqueness: { scope: :zip, message: "can only be used once per zip"}
 
     after_create :send_current_fires

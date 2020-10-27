@@ -1,0 +1,73 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.has-bg-img { 
+    background: 
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+        rgba(0, 0, 0, 0.2), 
+        rgba(0, 0, 0, 0.2)
+        ),
+        /* bottom, image */
+        url('burning_bg.png') center center; 
+    background-size: cover; 
+}
+
+#new_user strong {
+    color: rgb(255,253,208);
+}
+
+.help {
+    font-size: 0.95rem;
+    background:rgba(0, 0, 0, 0.3);
+}
+
+.button {
+    width: 100%;
+    font-weight:bold;
+}
+
+#submit:hover{
+  color: white;
+}
+
+#submit:focus{
+  border: 1px solid white;
+  color: white;
+}
+
+.is-success[disabled] {
+  opacity: 1;
+}
+
+.activate-modal:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.dark-orange {
+  background-color: rgb(252,116,28);
+  color: white;
+  border: none;
+}
+
+.card-header {
+  box-shadow: 0px 5px 5px grey;
+}
+
+.card-header-title {
+  color: white;
+}

@@ -5,7 +5,9 @@ class Wildfire < ApplicationRecord
     after_update :alert_users_that_fire_over
 
     def alert_users_that_fire_started
-        SendTextWorker.perform_async(self.users_near_self.map{ |u| u.to_h(:fire_started, self) })
+        if (users_to_text = self.users_near_self).present?
+            SendTextWorker.perform_async(users_to_text.map{ |u| u.to_h(:fire_started, self) })
+        end
     end
 
     def alert_users_that_fire_over

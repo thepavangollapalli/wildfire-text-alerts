@@ -1,9 +1,99 @@
-Wildfire text alerts
-<%= form_with model: @user do |f| %>
-    phone: <%= f.text_field :phone %>
-    zip: <%= f.text_field :zip %>
-    <%= f.submit "Sign up for text alerts" %>
-<% end %>
-<% flash.each do |msg| %>
-    <%= msg %>
-<% end %>
+<section class="hero is-dark is-fullheight has-bg-img">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Get a heads up about wildfires near you.
+            </h1>
+            <div id="new_user">
+                <%= form_with model: @user do |f| %>
+                    <div class="columns">
+                        <div class="column is-one-third">
+                            <strong>Phone:</strong> 
+                            <div class="control has-icons-left has-icons-right">
+                                <%= f.telephone_field :phone, class: "input", placeholder: '+12025550189', autofocus: true %>
+                                <span class="icon is-left">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                            </div>
+                            <div class="phone has-error">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-one-third">
+                            <!-- fun fact: 20252 is Smokey Bear's personal zip code -->
+                            <strong>ZIP Code:</strong> 
+                            <div class="control has-icons-left has-icons-right">
+                                <%= f.text_field :zip, class: "input", placeholder: '20252' %>
+                                <span class="icon is-left">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </span>
+                            </div>
+                            <div class="zip has-error">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-one-third">
+                            <%= f.submit "Send me a text", class: "button dark-orange", id: "submit", data: { disable_with: false } %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="is-align-self-flex-end m-3 activate-modal">
+        <p><i class="fas fa-info-circle"></i> What is this?</p>
+    </div>
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <!-- Any other Bulma elements you want -->
+            <div class="card">
+                <header class="card-header dark-orange">
+                    <p class="card-header-title">
+                    About this app
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <h4>How it works</h4>
+                            <p>
+                                This app polls the US government's <a href="https://www.forestsandrangelands.gov/WFIT/applications/IRWIN/index.shtml">IRWIN service</a> and sends 
+                                <a href="https://www.twilio.com/messaging-api">text messages via Twilio</a> to users who are near any reported fires. The data in the service may 
+                                contain errors or omissions and may not be as up to date as data from state or local departments, so <strong>please do not rely on this as 
+                                your only warning system!</strong> Check local authorities and fire maps, and make sure that you are prepared.
+                            </p>
+                        <h4>Stay prepared!</h4>
+                            <ul>
+                                <li><a href="https://incidents.readyforwildfire.org/">California wildfire resources</a></li>
+                                <li><a href="https://wildfire.oregon.gov/">Oregon wildfire resources</a></li>
+                                <li><a href="https://www.dnr.wa.gov/wildfires">Washington wildfire resources</a></li>
+                                <li><a href="https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/wildfire.html">Red Cross wildfire preparation tips</a></li>
+                                <li><a href="https://www.latimes.com/wildfires-map/">LA Times fire map</a></li>
+                            </ul>
+                        <h4>Thanks to</h4>
+                            <ul>
+                                <li><a href="https://data-nifc.opendata.arcgis.com/datasets/incident-3">Irwin API (hosted by ArcGIS)</li>
+                                <li><a href="https://www.twilio.com/docs">Twilio API</a></li>
+                                <li><a href="https://www.vecteezy.com/free-vector/forest-fire">Forest Fire Vectors by Vecteezy (image by yellowlion120)</a></li>
+                            </ul>
+                        <h4>Check me out</h4>
+                            <ul>
+                                <li><a href="https://github.com/thepavangollapalli">Github</a></li>
+                                <li><a href="https://linkedin.com/in/pavangollapalli">Linkedin</a></li>
+                            </ul>
+                        <h4>Privacy Policy</h4>
+                            <p>
+                                This app collects user phone numbers and zip codes and stores them in a database in order to send texts for nearby fires. This data will never be shared with 
+                                anyone. To request that your information be removed from the database, reply STOP to the number that you receive texts from. Any updates about the Privacy Policy
+                                will be sent via text to users of the application. This policy is effective as of October 26, 2020. This website will not change its behavior when it receives a
+                                'Do Not Track' signal from a user's browser, mainly because it does not have any tracking. No third-party analytics are in use. 
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+</section>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     def show
-        @user = User.find(params[:id])
+        @user = User.find(user_params)
     end
 
     def new
@@ -8,12 +8,15 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
-        if @user.save
-            redirect_to @user
-        else
-            flash[:alert] = @user.errors.messages
-            redirect_to new_user_path
+        @user = User.find_by(user_params) || User.new(user_params)
+
+        respond_to do |format|
+            if @user.save
+                format.json { render json: @user, status: :created, location: @user}
+            else
+                flash[:alert] = @user.errors.messages
+                format.json { render json: @user.errors.messages, status: :unprocessable_entity}
+            end
         end
     end
 

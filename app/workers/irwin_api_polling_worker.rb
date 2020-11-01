@@ -18,7 +18,9 @@ class IrwinApiPollingWorker
         }.with_indifferent_access
 
         response = HTTParty.get("https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Active_Fires/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
-        return unless response.code == 200
+        if response.code != 200
+            raise "API response is broken"
+        end
 
         response_json = JSON.parse(response)
         fires = response_json["features"]

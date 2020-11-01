@@ -1,5 +1,6 @@
 class Wildfire < ApplicationRecord
     scope :current, -> { where(stale: false) }
+    scope :nearby, ->(radius, zip) { current.select { |w| w.fire_within_radius(radius, zip) } }
 
     after_create :alert_users_that_fire_started
     after_update :alert_users_that_fire_over
@@ -20,10 +21,6 @@ class Wildfire < ApplicationRecord
         User.all.select { |u| self.fire_within_radius(25, u.zip) }
     end
 
-    def to_s
-        "#{self.incident_name} (#{display_commas(self.calculated_acres)} acres, #{"%.0f" % self.percent_contained}% contained) reported at #{self.initial_latitude}, #{self.initial_longitude}."
-    end
-
     # helper method to return if fire is within x miles of zip
     # Turn fire_within_radius into helper that returns distance
 
@@ -41,6 +38,10 @@ class Wildfire < ApplicationRecord
 
     def is_contained?
         self.percent_contained == 100.0 || self.archived_on.present? || self.stale
+    end
+
+    def to_s
+        "#{self.incident_name} (#{display_commas(self.calculated_acres)} acres, #{"%.0f" % self.percent_contained}% contained) reported at #{self.initial_latitude}, #{self.initial_longitude}."
     end
 
     private

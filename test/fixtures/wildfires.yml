@@ -1,15 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  incident_name: MyString
-  initial_latitude: 1.5
-  initial_longitude: 1.5
+  incident_name: FireOne
+  initial_latitude: 38.886669
+  initial_longitude: -77.029444
   discovered_at: 2020-09-20 19:32:37
-  calculated_acres: 1.5
+  calculated_acres: 42
+  stale: false
 
 two:
-  incident_name: MyString
-  initial_latitude: 1.5
-  initial_longitude: 1.5
+  incident_name: FireTwo
+  initial_latitude: 37.270543
+  initial_longitude: -122.02305
   discovered_at: 2020-09-20 19:32:37
-  calculated_acres: 1.5
+  calculated_acres: 69
+  stale: false
+
+three:
+  incident_name: FireThree
+  initial_latitude: 37.270672
+  initial_longitude: -122.02112
+  discovered_at: 2020-09-20 19:32:37
+  calculated_acres: 50
+  stale: false

@@ -1,6 +1,7 @@
 module ZipToCoordsHelper
     # https://public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/information/
     LOOKUP_HASH = {
+                "20252"=>["38.886669", "-77.029444"],
                 "67553"=>["38.654948", "-99.32062"],
                 "85743"=>["32.335122", "-111.14888"],
                 "75016"=>["32.767268", "-96.777626"],

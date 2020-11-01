@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  phone: MyText
-  zip: MyString
-  active: false
+  phone: "+11235551283"
+  zip: "20252"
+  active: true
 
 two:
-  phone: MyText
-  zip: MyString
-  active: false
+  phone: "+11235558993"
+  zip: "95070"
+  active: true

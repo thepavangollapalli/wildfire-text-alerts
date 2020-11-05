@@ -2,6 +2,10 @@ require 'test_helper'
 require 'sidekiq/testing'
 
 class WildfireTest < ActiveSupport::TestCase
+  setup do
+    Sidekiq::Testing.fake!
+  end
+
   # callbacks
   test "should send text to nearby users after created" do
     fire = Wildfire.new(initial_latitude: 37.270543, initial_longitude: -122.02305, calculated_acres: 1, incident_name: "test fire")

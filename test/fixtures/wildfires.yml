@@ -7,6 +7,8 @@ one:
   discovered_at: 2020-09-20 19:32:37
   calculated_acres: 42
   stale: false
+  object_id: 123123
+  percent_contained: 12.3
 
 two:
   incident_name: FireTwo
@@ -15,6 +17,7 @@ two:
   discovered_at: 2020-09-20 19:32:37
   calculated_acres: 69
   stale: false
+  percent_contained: 8.0
 
 three:
   incident_name: FireThree
@@ -23,3 +26,4 @@ three:
   discovered_at: 2020-09-20 19:32:37
   calculated_acres: 50
   stale: false
+  percent_contained: 49.8

@@ -6,6 +6,8 @@ class SendTextWorker
     def perform(users)
         account_sid = ENV['TWILIO_ACCOUNT_SID']
         auth_token = ENV['TWILIO_AUTH_TOKEN']
+        # byebug
+        # raise 'Environment variables not present' unless account_sid && auth_token
         @client = Twilio::REST::Client.new(account_sid, auth_token)
         from_phone = ENV['TWILIO_FROM_PHONE']
         users.each do |user|

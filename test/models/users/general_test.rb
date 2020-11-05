@@ -2,6 +2,10 @@ require 'test_helper'
 require 'sidekiq/testing'
 
 class GeneralTest < ActiveSupport::TestCase
+  setup do
+    Sidekiq::Testing.fake!
+  end
+
   # callbacks
   test "should call SendTextWorker after creation" do
     user = User.new(phone: "(382) 555 1298", zip: "20252")

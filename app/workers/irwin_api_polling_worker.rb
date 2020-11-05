@@ -17,12 +17,12 @@ class IrwinApiPollingWorker
             "PercentContained": "percent_contained"
         }.with_indifferent_access
 
-        response = HTTParty.get("https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Active_Fires/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")
+        response = HTTParty.get("https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Active_Fires/FeatureServer/0/query?f=json&outFields=*&outSR=4326&where=1=1")
         if response.code != 200
             raise "API response is broken"
         end
 
-        response_json = JSON.parse(response)
+        response_json = JSON.parse(response.body)
         fires = response_json["features"]
         seen_fire_ids = []
         fires.each do |f|
@@ -34,15 +34,16 @@ class IrwinApiPollingWorker
                 attr_hash[db_col] = val.respond_to?(:strip) ? val.strip : val
             end
             attr_hash.compact!
-            fire_id = attr_hash["object_id"]
-            wildfire = Wildfire.find_by(object_id: fire_id) || Wildfire.new
+            irwin_lookup_id = attr_hash["object_id"]
+            # Don't lookup nil object id in the db because then we'll modify another record with object id nil
+            wildfire = irwin_lookup_id.present? ?  Wildfire.find_or_create_by(object_id: irwin_lookup_id) : Wildfire.new
             wildfire.update(attr_hash)
-            seen_fire_ids.push(fire_id)
+            seen_fire_ids.push(wildfire.id)
             puts "Created record for #{wildfire.incident_name}"
         end
         puts "Created #{fires.length} rows from response. #{Wildfire.count} fires in total"
         # mark fires missing from response as stale
-        stale_wildfires = Wildfire.where.not(object_id: seen_fire_ids)
+        stale_wildfires = Wildfire.where.not(id: seen_fire_ids)
         stale_wildfires.each{ |sw| sw.update({stale: true}) }
         puts "Marked #{stale_wildfires.count} fires as stale"
     end

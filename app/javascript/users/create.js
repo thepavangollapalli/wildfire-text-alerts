@@ -11,9 +11,11 @@ $(document).ready(function() {
         $(".input").val('');
         $("#submit").removeClass("dark-orange").addClass("is-success").prop("disabled", true);
         $("#submit").val("Registered!");
+        //refocus on the phone field for more submissions
+        $("#user_phone").focus();
     });
 
-    $(".input").on("change", function(event) {
+    $(".input").on("keypress", function(event) {
         $("#submit").removeClass("is-success").addClass("dark-orange").prop("disabled", false);
         $("#submit").val("Send me a text");
     });

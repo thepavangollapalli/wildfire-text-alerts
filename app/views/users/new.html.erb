@@ -38,12 +38,14 @@
                             <%= f.submit "Send me a text", class: "button dark-orange", id: "submit", data: { disable_with: false } %>
                         </div>
                     </div>
+                    <div class="columns">
+                        <div class="column is-one-third">
+                            <strong class="activate-modal"><i class="fas fa-info-circle"></i> What is this?</strong>
+                        </div>
+                    </div>
                 <% end %>
             </div>
         </div>
-    </div>
-    <div class="is-align-self-flex-end m-3 activate-modal">
-        <p><i class="fas fa-info-circle"></i> What is this?</p>
     </div>
     <div class="modal">
         <div class="modal-background"></div>
@@ -60,11 +62,11 @@
                         <h4>How it works</h4>
                             <p>
                                 This app polls the US government's <a href="https://www.forestsandrangelands.gov/WFIT/applications/IRWIN/index.shtml">IRWIN service</a> and sends 
-                                <a href="https://www.twilio.com/messaging-api">text messages via Twilio</a> to users who are near any reported fires. The data in the service may 
+                                text messages to users who are near any reported fires. The data in the service may
                                 contain errors or omissions and may not be as up to date as data from state or local departments, so <strong>please do not rely on this as 
-                                your only warning system!</strong> Check local authorities and fire maps, and make sure that you are prepared.
+                                your only warning system!</strong> Check local authorities and fire maps, and do your best to stay prepared.
                             </p>
-                        <h4>Stay prepared!</h4>
+                        <h4>How to stay prepared</h4>
                             <ul>
                                 <li><a href="https://incidents.readyforwildfire.org/">California wildfire resources</a></li>
                                 <li><a href="https://wildfire.oregon.gov/">Oregon wildfire resources</a></li>

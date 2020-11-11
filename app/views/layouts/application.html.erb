@@ -5,6 +5,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- https://stackoverflow.com/questions/45314910/bulma-css-framework-columns-not-stacking-on-chrome-mobile-browser saved my ass -->
+    <!-- note to self: rtfm -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>

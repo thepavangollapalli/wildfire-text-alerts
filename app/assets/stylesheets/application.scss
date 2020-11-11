@@ -14,16 +14,20 @@
  *= require_self
  */
 
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
 .has-bg-img { 
     background: 
-        /* top, transparent black, faked with gradient */ 
-        linear-gradient(
-        rgba(0, 0, 0, 0.2), 
-        rgba(0, 0, 0, 0.2)
-        ),
-        /* bottom, image */
-        url('burning_bg.png') center center; 
-    background-size: cover; 
+      /* top, transparent black, faked with gradient */
+      linear-gradient(
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+      ),
+      /* bottom, image */
+      url('burning_bg.png') center center;
+    background-size: cover;
 }
 
 #new_user strong {
@@ -70,4 +74,32 @@
 
 .card-header-title {
   color: white;
+}
+
+@media screen and (max-device-width: 768px), screen and (max-width: 768px) {
+  body {
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  a {
+    color: #3273dc !important;
+    text-decoration: underline;
+  }
+
+  .modal-close {
+    right: 1%;
+    top: 1%;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .title {
+    text-align: left;
+  }
 }

@@ -30,5 +30,5 @@ $(document).ready(function() {
 
     $(".modal-background").not(".modal-content").on("click", function() {
         $(".modal").removeClass("is-active");
-    })
+    });
 });

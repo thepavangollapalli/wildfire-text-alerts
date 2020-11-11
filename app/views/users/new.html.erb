@@ -22,9 +22,9 @@
                     <div class="columns">
                         <div class="column is-one-third">
                             <!-- fun fact: 20252 is Smokey Bear's personal zip code -->
-                            <strong>ZIP Code:</strong> 
+                            <strong>ZIP Code:</strong>
                             <div class="control has-icons-left has-icons-right">
-                                <%= f.text_field :zip, class: "input", placeholder: '20252' %>
+                                <%= f.telephone_field :zip, class: "input", placeholder: '20252' %>
                                 <span class="icon is-left">
                                     <i class="fas fa-map-marked-alt"></i>
                                 </span>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="columns">
+                    <div class="columns is-desktop">
                         <div class="column is-one-third">
                             <%= f.submit "Send me a text", class: "button dark-orange", id: "submit", data: { disable_with: false } %>
                         </div>
@@ -61,7 +61,7 @@
                     <div class="content">
                         <h4>How it works</h4>
                             <p>
-                                This app polls the US government's <a href="https://www.forestsandrangelands.gov/WFIT/applications/IRWIN/index.shtml">IRWIN service</a> and sends 
+                                This app polls the US government's <a href="https://www.forestsandrangelands.gov/WFIT/applications/IRWIN/index.shtml">fire reporting service (IRWIN)</a> and sends
                                 text messages to users who are near any reported fires. The data in the service may
                                 contain errors or omissions and may not be as up to date as data from state or local departments, so <strong>please do not rely on this as 
                                 your only warning system!</strong> Check local authorities and fire maps, and do your best to stay prepared.

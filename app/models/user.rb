@@ -45,7 +45,7 @@ class User < ApplicationRecord
             errors.add(:phone, "can't be blank")
             clean = false
         end
-        phone_regex = /\A(\+1)?\s?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})\Z/
+        phone_regex = /\A(\+?1)?\s?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})\Z/
         match = phone_regex.match(self.phone)
         if match.nil?
             errors.add(:phone, "can only be a US phone number")

@@ -13,7 +13,7 @@ class ValidationTest < ActiveSupport::TestCase
   end
 
   test "should not save non-us phone" do
-    user = User.new(phone: "17108479267", zip: "20252")
+    user = User.new(phone: "+837108479267", zip: "20252")
     assert_not user.save, "Saved user with non-us phone"
   end
 
@@ -36,6 +36,12 @@ class ValidationTest < ActiveSupport::TestCase
 
   test "should save valid US phone number in consistent format" do
     user = User.new(phone: "(382) 555 1298", zip: "20252")
+    assert user.save, "Did not save user with valid us phone number"
+    assert_equal "+13825551298", user.phone, "Did not save user phone in correct format"
+  end
+
+  test "should save valid US phone number with country code" do
+    user = User.new(phone: "13825551298", zip: "20252")
     assert user.save, "Did not save user with valid us phone number"
     assert_equal "+13825551298", user.phone, "Did not save user phone in correct format"
   end

@@ -25,24 +25,32 @@ class Wildfire < ApplicationRecord
     # Turn fire_within_radius into helper that returns distance
 
     def fire_within_radius(radius, zip)
+        dist = distance_from_zip(zip)
+        dist < radius
+    end
+
+    def distance_from_zip(zip)
         if self.initial_latitude && self.initial_longitude
             lat, long = self.initial_latitude, self.initial_longitude
         else
             lat, long = fips_to_coords(self.fips)
         end
         user_lat, user_long = zip_to_coords(zip)
-
-        dist = distance_between_coords(lat, long, user_lat, user_long)
-        dist < radius
+        distance_between_coords(lat, long, user_lat, user_long)
     end
+
 
     def is_contained?
         self.percent_contained == 100.0 || self.archived_on.present? || self.stale
     end
 
-    def to_s
+    # distance from user as well
+    def to_s(zip=nil)
+        #distance_from_zip in text instead
         "#{self.incident_name} (#{display_commas(self.calculated_acres)} acres, #{"%.0f" % self.percent_contained}% contained) reported at #{self.initial_latitude}, #{self.initial_longitude}."
     end
+
+    #Need to allow sending STOP to stop all texts
 
     private
 

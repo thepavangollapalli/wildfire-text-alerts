@@ -36,7 +36,7 @@ class IrwinApiPollingWorker
             attr_hash.compact!
             irwin_lookup_id = attr_hash["object_id"]
             # Don't lookup nil object id in the db because then we'll modify another record with object id nil
-            wildfire = irwin_lookup_id.present? ?  Wildfire.find_or_create_by(object_id: irwin_lookup_id) : Wildfire.new
+            wildfire = irwin_lookup_id.present? ?  Wildfire.find_or_initialize_by(object_id: irwin_lookup_id) : Wildfire.new
             wildfire.update(attr_hash)
             seen_fire_ids.push(wildfire.id)
             puts "Created record for #{wildfire.incident_name}"

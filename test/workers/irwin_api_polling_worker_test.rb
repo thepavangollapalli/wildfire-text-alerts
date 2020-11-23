@@ -43,13 +43,13 @@ class IrwinApiPollingWorkerTest < ActiveSupport::TestCase
                 }
             }
         ]
-    }.to_json
+    }
 
     setup do
         Sidekiq::Testing.inline!
 
         stub_request(:get, "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Active_Fires/FeatureServer/0/query?f=json&outFields=*&outSR=4326&where=1=1")
-        .to_return(body: STUB_API_RESPONSE, headers: {content_type: 'application/json'})
+        .to_return(body: STUB_API_RESPONSE.to_json, headers: {content_type: 'application/json'})
     end
 
     test "ignores nil values in response row when inserting" do

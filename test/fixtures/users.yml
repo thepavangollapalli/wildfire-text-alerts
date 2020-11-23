@@ -9,3 +9,8 @@ two:
   phone: "+11235558993"
   zip: "95070"
   active: true
+
+three:
+  phone: "+11235551283"
+  zip: "94107"
+  active: true

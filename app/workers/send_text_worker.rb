@@ -18,7 +18,7 @@ class SendTextWorker
                 msgs.each do |msg|
                     msg_hash = msg.hash
                     if existing_msg = WildfireTextAlert.find_by(user_id: user_id, zip: user_zip, msg_hash: msg_hash)
-                        puts "Already sent text to #{user_phone} in #{user_zip} at #{existing_msg.text_sent_at}"
+                        puts "Already sent text to #{user_phone} in #{user_zip} at #{existing_msg.text_sent_at} (body: #{msg})"
                         next
                     end
                     message = @client.messages.create(

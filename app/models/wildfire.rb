@@ -21,9 +21,6 @@ class Wildfire < ApplicationRecord
         User.all.select { |u| self.fire_within_radius(25, u.zip) }
     end
 
-    # helper method to return if fire is within x miles of zip
-    # Turn fire_within_radius into helper that returns distance
-
     def fire_within_radius(radius, zip)
         dist = distance_from_zip(zip)
         dist < radius
@@ -36,18 +33,21 @@ class Wildfire < ApplicationRecord
             lat, long = fips_to_coords(self.fips)
         end
         user_lat, user_long = zip_to_coords(zip)
-        distance_between_coords(lat, long, user_lat, user_long)
+        distance_between_coords(lat, long, user_lat, user_long).round(2)
     end
-
 
     def is_contained?
         self.percent_contained == 100.0 || self.archived_on.present? || self.stale
     end
 
-    # distance from user as well
     def to_s(zip=nil)
-        #distance_from_zip in text instead
-        "#{self.incident_name} (#{display_commas(self.calculated_acres)} acres, #{"%.0f" % self.percent_contained}% contained) reported at #{self.initial_latitude}, #{self.initial_longitude}."
+        base = "#{self.incident_name} (#{display_commas(self.calculated_acres)} acres, #{"%.0f" % self.percent_contained}% contained), "
+        if zip.present?
+            base += "#{distance_from_zip(zip)} miles from #{zip}."
+        else
+            base += "reported at #{self.initial_latitude}, #{self.initial_longitude}."
+        end
+        base
     end
 
     #Need to allow sending STOP to stop all texts
@@ -61,6 +61,7 @@ class Wildfire < ApplicationRecord
 
     # helper method to convert fips to lat/long
     def fips_to_coords(fips)
+        raise "fips not passed in" unless fips.present?
         FipsToCoordsHelper::LOOKUP_HASH[fips].map(&:to_f)
     end
 

@@ -16,14 +16,14 @@ class User < ApplicationRecord
         case msg_type
         when :fire_started
             raise "fire not passed in for fire started msg type" unless fire.present?
-            msgs << "A new fire has been reported in your area: #{fire.to_s}"
+            msgs << "A new fire has been reported in your area: #{fire.to_s(self.zip)}"
         when :fire_ended
             raise "fire not passed in for fire ended msg type" unless fire.present?
-            msgs << "A fire has recently been marked as contained in your area: #{fire.to_s}"
+            msgs << "A fire has recently been marked as contained in your area: #{fire.to_s(self.zip)}"
         when :user_created
             msgs << "Hello! Thanks for signing up for wildfire text alerts."
             msgs << "There #{one_fire ? "is" : "are"} #{fires.count} #{one_fire ? "fire" : "fires"} near you#{zero_fires ? "." : ":"}"
-            msgs += fires.map(&:to_s)
+            msgs += fires.map { |f| f.to_s(self.zip) }
         end
         {phone: self.phone.to_s, msg: msgs, user_id: self.id, user_zip: self.zip}
     end

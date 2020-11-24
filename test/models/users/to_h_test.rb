@@ -20,7 +20,7 @@ class ToHTest < ActiveSupport::TestCase
     fire_one = wildfires(:one)
     expected_hash = {
                       phone: one.phone, 
-                      msg: ["A new fire has been reported in your area: #{fire_one.to_s}"],
+                      msg: ["A new fire has been reported in your area: #{fire_one.to_s(one.zip)}"],
                       user_id: one.id, 
                       user_zip: one.zip
                     }
@@ -40,7 +40,7 @@ class ToHTest < ActiveSupport::TestCase
     fire_one = wildfires(:one)
     expected_hash = {
                       phone: one.phone, 
-                      msg: ["A fire has recently been marked as contained in your area: #{fire_one.to_s}"],
+                      msg: ["A fire has recently been marked as contained in your area: #{fire_one.to_s(one.zip)}"],
                       user_id: one.id, 
                       user_zip: one.zip
                     }
@@ -52,7 +52,7 @@ class ToHTest < ActiveSupport::TestCase
     two = users(:two)
     fire_two = wildfires(:two)
     fire_three = wildfires(:three)
-    msgs = ["Hello! Thanks for signing up for wildfire text alerts.","There are 2 fires near you:", fire_two.to_s, fire_three.to_s]
+    msgs = ["Hello! Thanks for signing up for wildfire text alerts.","There are 2 fires near you:", fire_two.to_s(two.zip), fire_three.to_s(two.zip)]
     expected_hash = {
                       phone: two.phone, 
                       msg: msgs,

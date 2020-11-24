@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     require 'twilio-ruby'
 
-    # need to implement security check for this
+    # need to check request comes from Twilio
     skip_before_action :verify_authenticity_token, only: :delete
 
     def show

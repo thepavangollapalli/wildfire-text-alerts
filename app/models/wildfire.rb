@@ -50,8 +50,6 @@ class Wildfire < ApplicationRecord
         base
     end
 
-    #Need to allow sending STOP to stop all texts
-
     private
 
     # 145829.323 -> "145,829.32"

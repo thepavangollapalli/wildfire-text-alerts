@@ -10,5 +10,4 @@ if Rails.env.production?
 end
 
 # execute 5 minutes after every hour, ex: 12:05, 1:05, 2:05, etc
-# temp executes every 5 minutes
-Sidekiq::Cron::Job.create(name: 'Poll Irwin API - every hour', cron: '*/5 * * * *', class: 'IrwinApiPollingWorker')
+Sidekiq::Cron::Job.create(name: 'Poll Irwin API - every hour', cron: '5 * * * *', class: 'IrwinApiPollingWorker')

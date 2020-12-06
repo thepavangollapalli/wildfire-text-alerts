@@ -1,3 +1,5 @@
+require 'sidekiq-scheduler'
+
 class IrwinApiPollingWorker
     include Sidekiq::Worker
 

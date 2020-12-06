@@ -76,10 +76,16 @@ GEM
     connection_pool (2.2.3)
     crack (0.4.4)
     crass (1.0.6)
+    e2mmap (0.1.0)
     erubi (1.9.0)
+    et-orbi (1.2.4)
+      tzinfo
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
+    fugit (1.4.1)
+      et-orbi (~> 1.1, >= 1.1.8)
+      raabro (~> 1.4)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashdiff (1.0.1)
@@ -119,6 +125,7 @@ GEM
     public_suffix (4.0.6)
     puma (4.3.6)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
       rack
@@ -157,6 +164,8 @@ GEM
     redis (4.2.2)
     regexp_parser (1.8.0)
     rubyzip (2.3.0)
+    rufus-scheduler (3.6.0)
+      fugit (~> 1.1, >= 1.1.6)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -174,6 +183,13 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    sidekiq-scheduler (3.0.1)
+      e2mmap
+      redis (>= 3, < 5)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 3)
+      thwait
+      tilt (>= 1.4.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -187,6 +203,8 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.0.1)
     thread_safe (0.3.6)
+    thwait (0.2.0)
+      e2mmap
     tilt (2.0.10)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
@@ -237,6 +255,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq
+  sidekiq-scheduler (~> 3.0)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

@@ -1,0 +1,4 @@
+:schedule:
+  poll_irwin_api:
+    cron: '5 * * * *'   # Runs 5 minutes after every hour (12:05, 1:05, etc)
+    class: IrwinApiPollingWorker

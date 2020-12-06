@@ -59,3 +59,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "twilio-ruby", "~> 5.40"
+
+gem "sidekiq-cron", "~> 1.2"

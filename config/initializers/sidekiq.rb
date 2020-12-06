@@ -8,6 +8,3 @@ if Rails.env.production?
         config.redis = { url: ENV.fetch('REDIS_URL'), size: 12, network_timeout: 5 }
     end
 end
-
-# execute 5 minutes after every hour, ex: 12:05, 1:05, 2:05, etc
-Sidekiq::Cron::Job.create(name: 'Poll Irwin API - every hour', cron: '5 * * * *', class: 'IrwinApiPollingWorker')

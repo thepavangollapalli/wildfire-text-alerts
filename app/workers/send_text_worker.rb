@@ -26,7 +26,7 @@ class SendTextWorker
                                             from: from_phone,
                                             to: user_phone
                                         )
-                    WildfireTextAlert.create(user_id: user_id, msg_hash: msg_hash, zip: user_zip, text_sent_at: DateTime.now)
+                    WildfireTextAlert.create(user_id: user_id, msg_hash: msg_hash, zip: user_zip, text_sent_at: DateTime.now, msg: msg)
                     puts "Sent #{message.sid} to #{user_phone}"
                 end
             rescue Twilio::REST::TwilioError => e

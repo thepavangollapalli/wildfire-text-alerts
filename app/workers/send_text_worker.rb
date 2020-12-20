@@ -2,7 +2,8 @@ class SendTextWorker
     include Sidekiq::Worker
 
     require 'twilio-ruby'
-    
+    require 'digest/sha1'
+
     def perform(users)
         account_sid = ENV['TWILIO_ACCOUNT_SID']
         auth_token = ENV['TWILIO_AUTH_TOKEN']
@@ -16,8 +17,9 @@ class SendTextWorker
                 user_zip = user["user_zip"]
                 user_phone = user["phone"]
                 msgs.each do |msg|
-                    msg_hash = msg.hash
-                    if existing_msg = WildfireTextAlert.find_by(user_id: user_id, zip: user_zip, msg_hash: msg_hash)
+                    # using hexdigest because hash can be different across Ruby invocations
+                    msg_digest = Digest::SHA1.hexdigest(msg)
+                    if existing_msg = WildfireTextAlert.find_by(user_id: user_id, zip: user_zip, msg_digest: msg_digest)
                         puts "Already sent text to #{user_phone} in #{user_zip} at #{existing_msg.text_sent_at} (body: #{msg})"
                         next
                     end
@@ -26,7 +28,7 @@ class SendTextWorker
                                             from: from_phone,
                                             to: user_phone
                                         )
-                    WildfireTextAlert.create(user_id: user_id, msg_hash: msg_hash, zip: user_zip, text_sent_at: DateTime.now, msg: msg)
+                    WildfireTextAlert.create(user_id: user_id, msg_digest: msg_digest, zip: user_zip, text_sent_at: DateTime.now, msg: msg)
                     puts "Sent #{message.sid} to #{user_phone}"
                 end
             rescue Twilio::REST::TwilioError => e

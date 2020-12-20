@@ -11,7 +11,7 @@ Polls the US Government's IRWIN fire reporting service and sends texts to users 
 * Postgres
 
 ## Getting started
-* git clone this repository: git clone (link)
+* git clone this repository: `git clone https://github.com/thepavangollapalli/wildfire-text-alerts`
 * Create a database named `wildfire_text_alerts_development`
 * Sign up for a Twilio account and obtain a phone number with Programmable SMS link to (https://www.twilio.com/docs/sms)
 * Set environment variables `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_PHONE`

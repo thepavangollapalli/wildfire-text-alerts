@@ -1,6 +1,6 @@
 # Wildfire Text Alerts
 
-## [Check it out!](https://www.firealert.me)
+**[Check it out!](https://www.firealert.me)**
 
 Polls the US Government's IRWIN fire reporting service and sends texts to users who have signed up with a ZIP code within 25 miles of a fire. Runs Ruby on Rails with Sidekiq background workers, and is deployed on Heroku.
 

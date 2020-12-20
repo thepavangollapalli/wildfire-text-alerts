@@ -1,24 +1,23 @@
-# README
+# Wildfire Alerts
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Check it out:](https://www.firealert.me)
 
-Things you may want to cover:
+Polls the US Government's IRWIN fire reporting service and sends texts to users who have signed up with a ZIP code within 25 miles of a fire. Runs on Ruby on Rails with Sidekiq background workers, and is deployed on Heroku.
 
-* Ruby version
+* Dependencies
+    * Ruby 2.7.2
+    * Rails 6
+    * Sidekiq
+    * Postgres
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
+* Getting started
+    * git clone this repository: git clone (link)
+    * Create a database named `wildfire_text_alerts_development`
+    * Sign up for a Twilio account and obtain a phone number with Programmable SMS link to (https://www.twilio.com/docs/sms)
+    * Set environment variables `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_PHONE`
+    * Install all dependencies
+    * Start Rails and Sidekiq: `rails server` and `bundle exec Sidekiq`
+    * Enjoy!
 
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    * `rails test`

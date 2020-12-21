@@ -4,6 +4,8 @@
 
 Polls the US Government's IRWIN fire reporting service and sends texts to users who have signed up with a ZIP code within 25 miles of a fire. Runs Ruby on Rails with Sidekiq background workers, and is deployed on Heroku.
 
+[Product Hunt link](https://www.producthunt.com/posts/wildfire-alerts)
+
 ## Dependencies
 * Ruby 2.7.2
 * Rails 6

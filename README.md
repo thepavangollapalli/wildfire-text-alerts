@@ -2,10 +2,6 @@
 
 **[Check it out!](https://www.firealert.me)**
 
-![desktop screenshot](desktop_demo.png?raw=true)
-
-![mobile screenshot](mobile_demo.png?raw=true)
-
 Polls the US Government's IRWIN fire reporting service and sends texts to users who have signed up with a ZIP code within 25 miles of a fire. Runs Ruby on Rails with Sidekiq background workers, and is deployed on Heroku.
 
 ## Dependencies
@@ -38,3 +34,8 @@ bundle install
 
 ## How to run the test suite
 * `rails test`
+
+## Demo
+![desktop screenshot](desktop_demo.png?raw=true)
+
+![mobile screenshot](mobile_demo.png?raw=true)
